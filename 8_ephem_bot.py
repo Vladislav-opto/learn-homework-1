@@ -12,23 +12,13 @@
   бота отвечать, в каком созвездии сегодня находится планета.
 
 """
-import logging
-
+import logging, ephem, settings, datetime
+from datetime import date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
                     filename='bot.log')
-
-
-PROXY = {
-    'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {
-        'username': 'learn',
-        'password': 'python'
-    }
-}
-
 
 def greet_user(update, context):
     text = 'Вызван /start'
@@ -38,12 +28,31 @@ def greet_user(update, context):
 
 def talk_to_me(update, context):
     user_text = update.message.text
-    print(user_text)
-    update.message.reply_text(text)
-
+    today_0 = date.today() 
+    today = f'{today_0.year}/{today_0.month}/{today_0.day}'
+    dict_planets = {
+          'Mars': ephem.Mars(today),
+          'Mercury': ephem.Mercury(today),
+          'Venus': ephem.Venus(today),
+          'Jupiter': ephem.Jupiter(today),
+          'Saturn': ephem.Saturn(today),
+          'Neptune': ephem.Neptune(today),
+          'Uranus': ephem.Uranus(today),
+          'Pluto': ephem.Pluto(today),
+          'Sun': ephem.Sun(today),
+          'Moon': ephem.Moon(today),
+    }
+    if user_text.split()[0] == '/planet':
+      if user_text.split()[1] in dict_planets:
+        result = ephem.constellation(dict_planets[user_text.split()[1]])
+        update.message.reply_text(f'{user_text.split()[1]} сегодня находится в созвездии {result}')
+      else:
+        update.message.reply_text('Такой планеты не существует!')
+    else:
+      update.message.reply_text('Введите /planet и название планеты на английском с большой буквы, например Mars')
 
 def main():
-    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY, use_context=True)
+    mybot = Updater(settings.API_KEY, use_context=True)
 
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))

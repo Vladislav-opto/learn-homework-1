@@ -33,6 +33,5 @@ def main(age):
 if __name__ == "__main__":
     
     age = int(input('Введите Ваш возраст!: '))
-    
     result = main(age)
     print(result)

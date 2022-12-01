@@ -12,6 +12,7 @@
   бота отвечать, в каком созвездии сегодня находится планета.
 
 """
+
 import logging, ephem, settings, datetime
 from datetime import date
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -19,6 +20,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
                     filename='bot.log')
+
 
 def greet_user(update, context):
     text = 'Вызван /start'
@@ -28,8 +30,12 @@ def greet_user(update, context):
 
 def talk_to_me(update, context):
     user_text = update.message.text
-    today_0 = date.today() 
-    today = f'{today_0.year}/{today_0.month}/{today_0.day}'
+    update.message.reply_text(user_text)
+
+
+def planets_const(update, context):
+    user_text = update.message.text
+    today = date.today().strftime('%Y/%M%D')
     dict_planets = {
           'Mars': ephem.Mars(today),
           'Mercury': ephem.Mercury(today),
@@ -42,26 +48,22 @@ def talk_to_me(update, context):
           'Sun': ephem.Sun(today),
           'Moon': ephem.Moon(today),
     }
-    if user_text.split()[0] == '/planet':
-      if user_text.split()[1] in dict_planets:
+    if user_text.split()[1] in dict_planets:
         result = ephem.constellation(dict_planets[user_text.split()[1]])
         update.message.reply_text(f'{user_text.split()[1]} сегодня находится в созвездии {result}')
-      else:
-        update.message.reply_text('Такой планеты не существует!')
     else:
-      update.message.reply_text('Введите /planet и название планеты на английском с большой буквы, например Mars')
+        update.message.reply_text('Такой планеты не существует!')
 
 
-def main():
+def ephem_bot():
     mybot = Updater(settings.API_KEY, use_context=True)
-
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler("planet", planets_const))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
-
     mybot.start_polling()
     mybot.idle()
 
 
 if __name__ == "__main__":
-    main()
+    ephem_bot()

@@ -16,17 +16,14 @@
 """
 
 def ask_user(answers_dict):
-    """
-    Замените pass на ваш код
-    """
     question = input('Есть ко мне вопрос?\n')
     if answers_dict.get(question, None) is not None:
-      print(answers_dict[question])
+        print(answers_dict[question])
     else:
-      print('Че?..')
-    
-if __name__ == "__main__":
-    
+        print('Че?..')
+
+
+if __name__ == "__main__":  
     questions_and_answers = {
         'Что делаешь?': 'Программирую',
         'Как погода?':'Отвратная',

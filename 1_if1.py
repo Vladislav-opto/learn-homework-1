@@ -14,24 +14,24 @@
 
 """
 
-def main(age):
+def age_employment(age):
     """
     Эта функция вызывается автоматически при запуске скрипта в консоли
     В ней надо заменить pass на ваш код
     """
     if 0 < age < 7:
-      return 'Вы должны быть в детском саду!'
+        return 'Вы должны быть в детском саду!'
     elif age <= 18:
-      return 'Вы школьник!'
+        return 'Вы школьник!'
     elif age <= 24:
-      return 'Вы студент!'
+        return 'Вы студент!'
     elif age > 24:
-      return 'Вы должны работать!'
+        return 'Вы должны работать!'
     else:
-      return 'Ошибка! Вы ввели 0 или отрицательное число!'
+        return 'Ошибка! Вы ввели 0 или отрицательное число!'
+
 
 if __name__ == "__main__":
-    
     age = int(input('Введите Ваш возраст!: '))
-    result = main(age)
+    result = age_employment(age)
     print(result)

@@ -51,6 +51,7 @@ def talk_to_me(update, context):
     else:
       update.message.reply_text('Введите /planet и название планеты на английском с большой буквы, например Mars')
 
+
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
 

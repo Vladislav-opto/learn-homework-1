@@ -27,11 +27,10 @@ def main(result_sales):
     for element in result_sales:
       name = element['product']
       qnt_this_product = len(element['items_sold'])
-      summ_product = 0
       summ_product = sum(element['items_sold'])
       print(f'Суммарное количество продаж {name} составило {summ_product} шт.')
       if qnt_this_product != 0:
-        average_this_product = int(summ_product/qnt_this_product)
+        average_this_product = summ_product // qnt_this_product
         print(f'Среднее количество продаж {name} составило {average_this_product} шт.')
       else:
         print(f'Не было продано ни одного {name}')

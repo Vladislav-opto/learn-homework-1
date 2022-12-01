@@ -15,15 +15,13 @@
     
 """
 
-questions_and_answers = {}
-
 def ask_user(answers_dict):
     """
     Замените pass на ваш код
     """
     question = input('Есть ко мне вопрос?\n')
-    if answers_dict.get(question, None) != None:
-      print(answers_dict.get(question))
+    if answers_dict.get(question, None) is not None:
+      print(answers_dict[question])
     else:
       print('Че?..')
     

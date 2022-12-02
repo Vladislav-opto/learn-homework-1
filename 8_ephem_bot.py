@@ -24,7 +24,6 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
 
 def greet_user(update, context):
     text = 'Вызван /start'
-    print(text)
     update.message.reply_text(text)
 
 
@@ -37,19 +36,19 @@ def planets_const(update, context):
     user_text = update.message.text
     today = date.today().strftime('%Y/%M%D')
     dict_planets = {
-          'Mars': ephem.Mars(today),
-          'Mercury': ephem.Mercury(today),
-          'Venus': ephem.Venus(today),
-          'Jupiter': ephem.Jupiter(today),
-          'Saturn': ephem.Saturn(today),
-          'Neptune': ephem.Neptune(today),
-          'Uranus': ephem.Uranus(today),
-          'Pluto': ephem.Pluto(today),
-          'Sun': ephem.Sun(today),
-          'Moon': ephem.Moon(today),
+          'Mars': ephem.Mars,
+          'Mercury': ephem.Mercury,
+          'Venus': ephem.Venus,
+          'Jupiter': ephem.Jupiter,
+          'Saturn': ephem.Saturn,
+          'Neptune': ephem.Neptune,
+          'Uranus': ephem.Uranus,
+          'Pluto': ephem.Pluto,
+          'Sun': ephem.Sun,
+          'Moon': ephem.Moon,
     }
     if user_text.split()[1] in dict_planets:
-        result = ephem.constellation(dict_planets[user_text.split()[1]])
+        result = ephem.constellation(dict_planets[user_text.split()[1]](today))
         update.message.reply_text(f'{user_text.split()[1]} сегодня находится в созвездии {result}')
     else:
         update.message.reply_text('Такой планеты не существует!')

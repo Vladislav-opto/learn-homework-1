@@ -16,10 +16,6 @@
 """
 
 def string_comparison(string1, string2):
-    """
-    Эта функция вызывается автоматически при запуске скрипта в консоли
-    В ней надо заменить pass на ваш код
-    """
     if not isinstance(string1, str) or not isinstance(string2, str):
         return 0
     elif len(string1) == len(string2):

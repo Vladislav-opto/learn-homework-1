@@ -19,9 +19,9 @@ def discounted(price, discount, max_discount=20):
         discount = float(discount)
         max_discount = int(max_discount)
     except TypeError:
-        return('Ошибка в типе данных!')
+        return None
     except ValueError:
-        return('Ошибка в переданном значении!')
+        return None
     price = abs(price)
     discount = abs(discount)
     max_discount = abs(max_discount)

@@ -29,5 +29,5 @@ def age_employment(age):
 
 if __name__ == "__main__":
     age = int(input('Введите Ваш возраст!: '))
-    result = age_employment(age)
-    print(result)
+    age_result = age_employment(age)
+    print(age_result)

@@ -22,14 +22,14 @@ def string_comparison(string1, string2):
         return 1
     elif len(string1) > len(string2):
         return 2
-    elif (len(string1) != len(string2)) and string2 == 'learn': 
+    elif len(string1) != len(string2) and string2 == 'learn': 
         return 3
 
 
 if __name__ == "__main__":
-    result = string_comparison("123", "learn")
-    print(result)
-    result = string_comparison(1, "python")
-    print(result)
-    result = string_comparison("qwerty", "qwerty")
-    print(result)
+    string_compars = string_comparison("123", "learn")
+    print(string_compars)
+    string_compars = string_comparison(1, "python")
+    print(string_compars)
+    string_compars = string_comparison("qwerty", "qwerty")
+    print(string_compars)

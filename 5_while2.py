@@ -17,7 +17,7 @@
 
 def ask_user(answers_dict):
     question = input('Есть ко мне вопрос?\n')
-    if answers_dict.get(question, None) is not None:
+    if question in answers_dict:
         print(answers_dict[question])
     else:
         print('Че?..')

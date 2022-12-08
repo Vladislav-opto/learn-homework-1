@@ -17,10 +17,7 @@
 
 def ask_user(answers_dict):
     question = input('Есть ко мне вопрос?\n')
-    if question in answers_dict:
-        print(answers_dict[question])
-    else:
-        print('Че?..')
+    print(answers_dict.get(question, "Че?"))
 
 
 if __name__ == "__main__":  
